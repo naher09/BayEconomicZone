@@ -690,7 +690,8 @@ h6,
 
 /*** Footer ***/
 .footer {
-    color: #B0B9AE;
+    background-color: #F8F9FA;  /* light background (matches Bootstrap bg-light) */
+    color: #212529;             /* dark text — high contrast on light bg */
 }
 
 .footer .btn.btn-link {
@@ -698,7 +699,7 @@ h6,
     margin-bottom: 5px;
     padding: 0;
     text-align: left;
-    color: #B0B9AE;
+    color: #212529;             /* dark links instead of the old gray */
     font-weight: normal;
     text-transform: capitalize;
     transition: .3s;
@@ -713,12 +714,18 @@ h6,
 }
 
 .footer .btn.btn-link:hover {
-    color: var(--light);
+    color: var(--primary);      /* orange/red accent on hover — visible & on-brand */
     letter-spacing: 1px;
     box-shadow: none;
 }
 
+/* Headings inside footer — currently use text-white, switch to dark */
+.footer h5.text-white {
+    color: #212529 !important;
+}
+
 .copyright {
-    color: #B0B9AE;
-    border-top: 1px solid rgba(255, 255, 255, .1);
+    background-color: #F8F9FA;
+    color: #212529;
+    border-top: 1px solid rgba(0, 0, 0, .1);  /* subtle divider — visible on light bg */
 }
