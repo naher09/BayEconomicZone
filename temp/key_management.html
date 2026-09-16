@@ -1,0 +1,189 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style>
+body { background: #fff !important; }
+
+/* Menu color fix */
+#header .navmenu ul li a { color: #000 !important; }
+
+/* Modern Popup Design */
+.modal-content {
+    border-radius: 22px !important;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.25);
+    animation: popupZoom 0.25s ease-out;
+}
+
+@keyframes popupZoom {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    border-bottom: none !important;
+    padding: 20px 30px !important;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #222;
+}
+
+.modal-body {
+    padding: 35px;
+}
+
+/* Responsive content wrapper */
+.member-desc-wrapper {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.member-desc-wrapper img {
+    border-radius: 15px;
+    max-width: 260px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.member-desc-text {
+    flex: 1;
+    min-width: 240px;
+}
+
+/* Better Close Button */
+.btn-close {
+    filter: brightness(0);
+    transform: scale(1.2);
+}
+
+@media(max-width: 768px){
+  .modal-body { padding: 25px; }
+  .modal-content { border-radius: 18px !important; }
+}
+</style>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s"
+     {% if site_banner and site_banner.image %}style="background-image: url('{{ site_banner.image.url }}');"{% endif %}>
+    <div class="container py-5">
+        <h1 class="display-3 text-white animated slideInRight">Key Management</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb animated slideInRight mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Key Management</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<main class="main" style="margin-top: 8%;">
+
+  <!-- Team Section -->
+<!-- Team Section -->
+<section id="team" class="team section light-background">
+
+  <!-- Section Title -->
+
+  <div class="container">
+    <div class="row gy-5">
+
+      {% for member in team_members %}
+      <div class="col-lg-4 col-md-6 member" data-aos="fade-up">
+
+        <div class="member-img">
+          {% if member.image %}
+            <img src="{{ member.image.url }}" class="img-fluid" alt="{{ member.name }}">
+          {% else %}
+            <img src="{% static 'assets/img/team/default.jpg' %}" class="img-fluid" alt="No Image">
+          {% endif %}
+
+          <div class="social">
+            {% if member.link %}
+              <a href="{{ member.link }}" target="_blank">
+                <i class="bi bi-link-45deg"></i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="member-info text-center">
+          <h4>{{ member.name }}</h4>
+
+          <!-- Short Designation -->
+          <div>
+            <p><b>{{ member.designation|striptags|truncatewords:15 }}</b></p>
+          </div>
+          <div>
+            {{ member.description|striptags|truncatewords:15 }}
+          </div>
+
+          <!-- See More Button -->
+          <button class="btn btn-sm mt-2"
+                  style="background:#C62828; color:white; border-radius:8px; padding:7px 18px; font-weight:600;"
+                  data-bs-toggle="modal"
+                  data-bs-target="#fullscreenModal{{ member.id }}">
+            See More
+          </button>
+        </div>
+
+      </div>
+
+      <!-- MODAL -->
+      <div class="modal fade" id="fullscreenModal{{ member.id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title">{{ member.name }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+              <div class="member-desc-wrapper">
+
+                <!-- Image -->
+                {% if member.image %}
+                  <img src="{{ member.image.url }}" alt="">
+                {% else %}
+                  <img src="{% static 'assets/img/team/default.jpg' %}" alt="">
+                {% endif %}
+
+                <!-- Full RichText -->
+                <div class="member-desc-text">
+                  <div style="line-height:1.8;">
+                    {{ member.description|safe }}
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
+
+      {% empty %}
+        <div class="text-center">
+          <p>No key management members available at this time.</p>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+</section>
+
+
+</main>
+<br/><br/>
+{% endblock %}

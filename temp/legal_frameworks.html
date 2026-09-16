@@ -1,0 +1,127 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn"
+     {% if site_banner and site_banner.image %}style="background-image: url('{{ site_banner.image.url }}');"{% endif %}>
+    <div class="container py-5">
+        <h1 class="display-3 text-white">Legal Frameworks</h1>
+        <p class="text-white-50 mt-2">
+            Policies, regulations and governance structure
+        </p>
+    </div>
+</div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+
+        <div class="row g-4">
+        {% for legal in legals %}
+            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+
+                <div style="
+                    position: relative;
+                    background: #ffffff;
+                    border-radius: 18px;
+                    padding: 32px;
+                    box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+                    border: 1px solid #eef1f5;
+                    transition: all 0.3s ease;
+                ">
+
+                    <!-- Accent Line -->
+                    <span style="
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 6px;
+                        height: 100%;
+                        background: linear-gradient(180deg, #0d6efd, #5aa2ff);
+                        border-radius: 18px 0 0 18px;
+                    "></span>
+
+                    <!-- Header -->
+                    <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <div style="
+                            width: 56px;
+                            height: 56px;
+                            background: linear-gradient(135deg, #0d6efd, #5aa2ff);
+                            color: #fff;
+                            font-size: 20px;
+                            font-weight: 600;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 20px;
+                        ">
+                            {{ forloop.counter }}
+                        </div>
+
+                        <div>
+                            <h3 style="
+                                margin: 0;
+                                font-weight: 600;
+                                color: #222;
+                            ">
+                                {{ legal.title }}
+                            </h3>
+                            <small style="
+                                text-transform: uppercase;
+                                font-weight: 500;
+                                color: #0d6efd;
+                                letter-spacing: 1px;
+                            ">
+                                Legal Framework
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div style="
+                        font-size: 16px;
+                        line-height: 1.9;
+                        color: #555;
+                        margin-bottom: 24px;
+                    ">
+                        {{ legal.description|safe }}
+                    </div>
+
+                    <!-- Important Link -->
+                    {% if legal.important_link %}
+                    <a href="{{ legal.important_link }}"
+                       target="_blank"
+                       style="
+                            display: inline-block;
+                            padding: 8px 22px;
+                            border-radius: 50px;
+                            border: 1px solid #0d6efd;
+                            color: #0d6efd;
+                            text-decoration: none;
+                            font-size: 14px;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                       "
+                       onmouseover="this.style.background='#0d6efd'; this.style.color='#fff';"
+                       onmouseout="this.style.background='transparent'; this.style.color='#0d6efd';">
+                        View Official Document
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        {% empty %}
+            <div class="col-12 text-center text-muted">
+                No legal frameworks available.
+            </div>
+        {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,594 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+    <div class="container-fluid px-0 mb-5">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                {% for banner in banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+                    {% if banner.background_image %}
+                        <img class="w-100"
+                             src="{{ banner.background_image.url }}"
+                             alt="{{ banner.title }}">
+                    {% endif %}
+
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 text-start">
+
+                                    {% if banner.subtitle %}
+                                    <p class="fs-5 fw-medium text-primary text-uppercase animated slideInRight"
+                                       style="color:#b3bdce !important;">
+                                        {{ banner.subtitle }}
+                                    </p>
+                                    {% endif %}
+
+                                    <h1 class="display-1 text-white mb-5 animated slideInRight">
+                                        {{ banner.title }}
+                                    </h1>
+
+                                    {% if banner.button_text %}
+                                    <a href="{{ banner.button_link }}"
+                                       class="btn btn-primary py-3 px-5 animated slideInRight">
+                                        {{ banner.button_text }}
+                                    </a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button"
+                    data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button"
+                    data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Carousel End -->
+
+
+    <!-- Home About Start -->
+    {% if home_about %}
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+
+                <!-- Images -->
+                <div class="col-lg-6">
+                    <div class="row gx-3 h-100">
+
+                        {% if home_about.image_1 %}
+                        <div class="col-6 align-self-start wow fadeInUp" data-wow-delay="0.1s">
+                            <div style="width:100%; height:100%; overflow:hidden;">
+                                <img src="{{ home_about.image_1.url }}"
+                                     alt="{{ home_about.title }}"
+                                     style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if home_about.image_2 %}
+                        <div class="col-6 align-self-end wow fadeInDown" data-wow-delay="0.1s">
+                            <div style="width:100%; height:100%; overflow:hidden;">
+                                <img src="{{ home_about.image_2.url }}"
+                                     alt="{{ home_about.title }}"
+                                     style="width:100%; height:100%; object-fit:cover; border-radius:6px;">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <p class="fw-medium text-uppercase text-primary mb-2">
+                        About Us
+                    </p>
+
+                    <h1 class="display-5 mb-4">
+                        {{ home_about.title }}
+                    </h1>
+
+                    <div class="mb-4">
+                        {{ home_about.description|safe }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!--End Home About End -->
+
+
+    <!-- Facts Start -->
+    <div class="container-fluid facts my-5 p-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-certificate fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">25</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Years Experience</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">135</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Team Members</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">957</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Happy Clients</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-check-double fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">1839</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Projects Done</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facts End -->
+
+
+    {% if why_choose %}
+    <!-- Features Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+
+                <!-- Left Image / Video -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative me-lg-4">
+
+                        {% if why_choose.image %}
+                        <img class="img-fluid w-100" src="{{ why_choose.image.url }}" alt="{{ why_choose.title }}">
+                        {% endif %}
+
+                        <span class="position-absolute top-50 start-100 translate-middle bg-white rounded-circle d-none d-lg-block"
+                              style="width: 120px; height: 120px;"></span>
+
+                        {% if why_choose.video_url %}
+                        <button type="button" class="btn-play" data-bs-toggle="modal"
+                                data-src="{{ why_choose.video_url }}" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+
+                    {% if why_choose.subtitle %}
+                    <p class="fw-medium text-uppercase text-primary mb-2">
+                        {{ why_choose.subtitle }}
+                    </p>
+                    {% endif %}
+
+                    <h1 class="display-5 mb-4">
+                        {{ why_choose.title }}
+                    </h1>
+
+                    <div class="mb-4">
+                        {{ why_choose.description|safe }}
+                    </div>
+
+                    <!-- Optional: Features points can also be dynamic if added later -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+    {% endif %}
+
+
+
+    <!-- Video Modal Start -->
+    <div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
+                            allowscriptaccess="always" allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Modal End -->
+
+
+    <!-- Service Start -->
+    {% if services %}
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Our Services</p>
+                <h1 class="display-5 mb-4">We Provide Best Industrial Services</h1>
+            </div>
+            <div class="row gy-5 gx-4">
+                 {% for service in services %}
+                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item">
+                          {% if service.image %}
+                            <img class="img-fluid" src="{{ service.image.url }}" alt="{{ service.title }}">
+                            <div class="service-img">
+                                <img class="img-fluid" src="{{ service.image.url }}" alt="{{ service.title }}">
+                            </div>
+                          {% endif %}
+                        <div class="service-detail">
+                            <div class="service-title">
+                                <hr class="w-25">
+                                <h3 class="mb-0">{{ service.title }}</h3>
+                                <hr class="w-25">
+                            </div>
+                            <div class="service-text">
+                                <p class="text-white mb-0">
+                                     {{ service.description|safe }}
+                                </p>
+                            </div>
+                        </div>
+                        {% if service.link %}
+                        <a class="btn btn-light" href="{{ service.link }}">Read More</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- Service End -->
+
+    <!-- Project Start -->
+    <div class="container-fluid bg-dark py-5 my-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width:650px;">
+                <p class="fw-medium text-uppercase text-primary mb-2" style="color:orange;">
+                    Our Project
+                </p>
+                <h1 style="color:#ffffff;font-size:3rem;font-weight:800;line-height:1.2;">
+                    Recently Completed Projects
+                </h1>
+            </div>
+            <div class="row g-4">
+                {% for project in projects %}
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ project.link|default:'#' }}" style="text-decoration:none;">
+
+                        <div style="
+                            position:relative;
+                            border-radius:18px;
+                            overflow:hidden;
+                            background:rgba(255,255,255,0.05);
+                            backdrop-filter:blur(8px);
+                            box-shadow:0 25px 60px rgba(0,0,0,0.5);
+                            transition:all .4s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-12px)';this.style.boxShadow='0 35px 80px rgba(0,0,0,.7)'"
+                        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 25px 60px rgba(0,0,0,.5)'">
+
+                            <img src="{{ project.image.url }}"
+                                 alt="{{ project.title }}"
+                                 style="
+                                 width:100%;
+                                 height:280px;
+                                 object-fit:cover;
+                                 transition:transform .6s ease;
+                                 "
+                                 onmouseover="this.style.transform='scale(1.15)'"
+                                 onmouseout="this.style.transform='scale(1)'">
+
+                            <div style="
+                                position:absolute;
+                                inset:0;
+                                background:linear-gradient(
+                                    to top,
+                                    rgba(0,0,0,0.9),
+                                    rgba(0,0,0,0.4),
+                                    transparent
+                                );
+                                display:flex;
+                                align-items:flex-end;
+                                justify-content:center;
+                                padding:25px;
+                            ">
+                                <div style="
+                                    background:rgba(255,255,255,0.15);
+                                    backdrop-filter:blur(10px);
+                                    padding:10px 18px;
+                                    border-radius:30px;
+                                    border:1px solid rgba(255,255,255,0.25);
+                                ">
+                                    <h5 style="
+                                        color:#ffffff;
+                                        font-weight:700;
+                                        margin:0;
+                                        letter-spacing:.5px;
+                                    ">
+                                        {{ project.title }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonial Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Partners</p>
+                <h1 class="display-5 mb-5">Our Sister Concern</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                {% for partner in partners %}
+                <div class="testimonial-item text-center">
+                    <div class="testimonial-img position-relative">
+                        <img class="img-fluid rounded-circle mx-auto mb-5"
+                             src="{{ partner.image.url }}"
+                             alt="{{ partner.title }}">
+                        <div class="btn-square bg-primary rounded-circle">
+                            <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-text text-center rounded p-4">
+                        <p>{{ partner.description|safe }}</p>
+                        <h5 class="mb-1">{{ partner.title }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Mission & Vision Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+
+            <!-- Section Title -->
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Our Purpose</p>
+                <h1 class="display-5">Mission & Vision</h1>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Mission -->
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="p-5 h-100"
+                         style="background:white; border-radius:12px;
+                                box-shadow:0 10px 30px rgba(0,0,0,.08);
+                                transition:all .3s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';
+                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
+                         onmouseout="this.style.transform='none';
+                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-bullseye text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Our Mission</h4>
+                        </div>
+
+                        {% for mission in missions %}
+                            <h5>{{ mission.title }}</h5>
+                            <p class="mb-3">{{ mission.content|safe }}</p>
+                        {% empty %}
+                            <p>No mission added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Vision -->
+                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="p-5 h-100"
+                         style="background:white; border-radius:12px;
+                                box-shadow:0 10px 30px rgba(0,0,0,.08);
+                                transition:all .3s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';
+                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
+                         onmouseout="this.style.transform='none';
+                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-eye text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Our Vision</h4>
+                        </div>
+
+                        {% for vision in visions %}
+                            <h5>{{ vision.title }}</h5>
+                            <p class="mb-3">{{ vision.content|safe }}</p>
+                        {% empty %}
+                            <p>No vision added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Mission & Vision End -->
+
+
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+
+<!--            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">-->
+<!--                <p class="fw-medium text-uppercase text-primary mb-2">Blog Post</p>-->
+<!--                <h1 class="display-5 mb-5">Our Latest Blog Posts</h1>-->
+<!--            </div>-->
+
+<!--            <div class="row g-4">-->
+
+<!--                &lt;!&ndash; Blog 1 &ndash;&gt;-->
+<!--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">-->
+<!--                    <div style="background:#f8f9fa;height:100%;border-radius:10px;overflow:hidden;-->
+<!--                                transition:all .3s ease;"-->
+<!--                         onmouseover="this.style.transform='translateY(-5px)';-->
+<!--                                      this.style.boxShadow='0 10px 30px rgba(0,0,0,.12)'"-->
+<!--                         onmouseout="this.style.transform='none';-->
+<!--                                     this.style.boxShadow='none'">-->
+
+<!--                        <div style="height:220px;overflow:hidden;">-->
+<!--                            <img src="../static/img/03.jpeg" alt=""-->
+<!--                                 style="width:100%;height:100%;object-fit:cover;-->
+<!--                                        transition:transform .4s ease;"-->
+<!--                                 onmouseover="this.style.transform='scale(1.1)'"-->
+<!--                                 onmouseout="this.style.transform='scale(1)'">-->
+<!--                        </div>-->
+
+<!--                        <div style="padding:20px;">-->
+<!--                            <h5 style="margin-bottom:10px;">How Technology Is Changing Business</h5>-->
+<!--                            <p style="margin-bottom:15px;">-->
+<!--                                Learn how modern technology is transforming businesses.-->
+<!--                            </p>-->
+<!--                            <a href="#" class="btn btn-outline-primary btn-sm">-->
+<!--                                Read More <i class="fa fa-arrow-right ms-2"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Blog 2 &ndash;&gt;-->
+<!--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">-->
+<!--                    <div style="background:#f8f9fa;height:100%;border-radius:10px;overflow:hidden;-->
+<!--                                transition:all .3s ease;"-->
+<!--                         onmouseover="this.style.transform='translateY(-5px)';-->
+<!--                                      this.style.boxShadow='0 10px 30px rgba(0,0,0,.12)'"-->
+<!--                         onmouseout="this.style.transform='none';-->
+<!--                                     this.style.boxShadow='none'">-->
+
+<!--                        <div style="height:220px;overflow:hidden;">-->
+<!--                            <img src="../static/img/04.jpeg" alt=""-->
+<!--                                 style="width:100%;height:100%;object-fit:cover;-->
+<!--                                        transition:transform .4s ease;"-->
+<!--                                 onmouseover="this.style.transform='scale(1.1)'"-->
+<!--                                 onmouseout="this.style.transform='scale(1)'">-->
+<!--                        </div>-->
+
+<!--                        <div style="padding:20px;">-->
+<!--                            <h5 style="margin-bottom:10px;">Top Web Development Trends</h5>-->
+<!--                            <p style="margin-bottom:15px;">-->
+<!--                                Explore the latest technologies in web development.-->
+<!--                            </p>-->
+<!--                            <a href="#" class="btn btn-outline-primary btn-sm">-->
+<!--                                Read More <i class="fa fa-arrow-right ms-2"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Blog 3 &ndash;&gt;-->
+<!--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
+<!--                    <div style="background:#f8f9fa;height:100%;border-radius:10px;overflow:hidden;-->
+<!--                                transition:all .3s ease;"-->
+<!--                         onmouseover="this.style.transform='translateY(-5px)';-->
+<!--                                      this.style.boxShadow='0 10px 30px rgba(0,0,0,.12)'"-->
+<!--                         onmouseout="this.style.transform='none';-->
+<!--                                     this.style.boxShadow='none'">-->
+
+<!--                        <div style="height:220px;overflow:hidden;">-->
+<!--                            <img src="../static/img/03.jpeg" alt=""-->
+<!--                                 style="width:100%;height:100%;object-fit:cover;-->
+<!--                                        transition:transform .4s ease;"-->
+<!--                                 onmouseover="this.style.transform='scale(1.1)'"-->
+<!--                                 onmouseout="this.style.transform='scale(1)'">-->
+<!--                        </div>-->
+
+<!--                        <div style="padding:20px;">-->
+<!--                            <h5 style="margin-bottom:10px;">Digital Marketing Strategies</h5>-->
+<!--                            <p style="margin-bottom:15px;">-->
+<!--                                Boost your business growth with smart marketing.-->
+<!--                            </p>-->
+<!--                            <a href="#" class="btn btn-outline-primary btn-sm">-->
+<!--                                Read More <i class="fa fa-arrow-right ms-2"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Blog 4 &ndash;&gt;-->
+<!--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">-->
+<!--                    <div style="background:#f8f9fa;height:100%;border-radius:10px;overflow:hidden;-->
+<!--                                transition:all .3s ease;"-->
+<!--                         onmouseover="this.style.transform='translateY(-5px)';-->
+<!--                                      this.style.boxShadow='0 10px 30px rgba(0,0,0,.12)'"-->
+<!--                         onmouseout="this.style.transform='none';-->
+<!--                                     this.style.boxShadow='none'">-->
+
+<!--                        <div style="height:220px;overflow:hidden;">-->
+<!--                            <img src="../static/img/04.jpeg" alt=""-->
+<!--                                 style="width:100%;height:100%;object-fit:cover;-->
+<!--                                        transition:transform .4s ease;"-->
+<!--                                 onmouseover="this.style.transform='scale(1.1)'"-->
+<!--                                 onmouseout="this.style.transform='scale(1)'">-->
+<!--                        </div>-->
+
+<!--                        <div style="padding:20px;">-->
+<!--                            <h5 style="margin-bottom:10px;">Future of Artificial Intelligence</h5>-->
+<!--                            <p style="margin-bottom:15px;">-->
+<!--                                Discover how AI is changing the future of industries.-->
+<!--                            </p>-->
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                Read More <i class="fa fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

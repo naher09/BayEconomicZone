@@ -1,0 +1,88 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+/* CKEditor content base */
+.ckeditor-content {
+    width: 100%;
+}
+
+/* Table auto-fit (NO SCROLL, NO CUT) */
+.ckeditor-content table {
+    width: 100% !important;
+    max-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* Cell behavior */
+.ckeditor-content th,
+.ckeditor-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Header style */
+.ckeditor-content th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+/* Mobile handling */
+@media (max-width: 768px) {
+    .ckeditor-content table {
+        font-size: 14px;
+    }
+}
+</style>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s"
+     {% if site_banner and site_banner.image %}style="background-image: url('{{ site_banner.image.url }}');"{% elif header and header.background_image %}style="background-image: url('{{ header.background_image.url }}');"{% endif %}>
+    <div class="container py-5">
+        <h1 class="display-3 text-white animated slideInRight">
+            About Us
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb animated slideInRight mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                   About Us
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- START SECTION UI ELEMENT -->
+<section class="about-us bg-white-1">
+    <div class="container">
+        <div class="row">
+            {% for section in about_sections %}
+                <div class="sec-title w-100">
+                    <br><br>
+                    <h2>{{ section.title }}</h2>
+                </div>
+                <div class="col-lg-12 col-md-12 mb70 bg-shb p-3 who-1">
+                    <!-- CKEditor Content -->
+                    <div class="pftext ckeditor-content">
+                        {{ section.description|safe }}
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No content available.</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- END SECTION UI ELEMENT -->
+
+{% endblock %}

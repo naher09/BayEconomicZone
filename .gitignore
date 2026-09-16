@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+
+# Django collected static files
+staticfiles/
+
+# User uploaded media (optional - remove if you want media in git)
+media/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+zone/migrations/0003_compliancesection_keymanagement_and_more.py
+zone/migrations/0004_mission_vision_delete_keymanagementheadline_and_more.py
+zone/migrations/0005_alter_mission_options_alter_vision_options.py
