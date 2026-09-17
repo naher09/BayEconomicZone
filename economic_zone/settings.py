@@ -59,11 +59,12 @@ MIDDLEWARE = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
+EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'info@bayeconomiczone.com'
-EMAIL_HOST_PASSWORD = 'jrJT NQr8 uiBm'
+EMAIL_HOST_PASSWORD = 'Info@Bez2027'
 DEFAULT_FROM_EMAIL = 'info@bayeconomiczone.com'
 
 ROOT_URLCONF = 'economic_zone.urls'
