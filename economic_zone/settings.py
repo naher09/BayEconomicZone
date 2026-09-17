@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ki^xe(gu0-(aky0f$2-178%sk6cusx)5bmac8(b0_gk-fva$+9
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '103.169.105.109',
+    # '103.169.105.109',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -60,11 +60,11 @@ MIDDLEWARE = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_PORT = 587
-EMAIL_USE_SSL = False
-EMAIL_USE_TLS = True
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'info@bayeconomiczone.com'
-EMAIL_HOST_PASSWORD = 'Info@Bez2027'
+EMAIL_HOST_PASSWORD = 'gzQQ ryd4 bBi6'
 DEFAULT_FROM_EMAIL = 'info@bayeconomiczone.com'
 
 ROOT_URLCONF = 'economic_zone.urls'
@@ -92,12 +92,12 @@ WSGI_APPLICATION = 'economic_zone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
-#}
+# }
 
 
 DATABASES = {
