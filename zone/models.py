@@ -222,7 +222,7 @@ class ContactInfo(models.Model):
     phone_number = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     email_address = models.EmailField(blank=True, null=True)
     office_address = models.CharField(max_length=300, default="We Are Leader", blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True)
+    map_link = models.URLField(blank=True, null=True, max_length=500)
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
     is_active = models.BooleanField(default=True, blank=True, null=True)

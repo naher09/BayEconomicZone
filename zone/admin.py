@@ -382,8 +382,8 @@ class RequestInvestorMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'phone_number', 'email_address', 'office_address', 'is_active')
-    list_editable = ('is_active',)
+    list_display = ('id', 'title', 'phone_number', 'email_address', 'office_address','map_link', 'is_active')
+    list_editable = ('map_link', 'is_active',)
     search_fields = ('title', 'phone_number', 'email_address', 'office_address')
     list_filter = ('is_active',)
     fieldsets = (
