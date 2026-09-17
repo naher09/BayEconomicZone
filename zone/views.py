@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from . models import *
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def home_view(request):
@@ -116,6 +118,21 @@ def request_investor(request):
                 country=country,
                 address=address,
                 message=message_text
+            )
+            send_mail(
+                subject=f'New Investor Registration: {name}',
+                message=(
+                    f'Name: {name}\n'
+                    f'Email: {email}\n'
+                    f'Phone: {phone}\n'
+                    f'City: {city}\n'
+                    f'Country: {country}\n'
+                    f'Address: {address}\n'
+                    f'Message: {message_text}'
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=['info@bayeconomiczone.com'],
+                fail_silently=False,
             )
             messages.success(request, "Your request has been submitted successfully!")
             return redirect('request_investor')

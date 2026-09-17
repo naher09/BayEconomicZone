@@ -236,6 +236,7 @@ h6,
 
 .page-header {
     position: relative;
+    background-color: #F8F9FA;  /* match footer bg-light */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -246,7 +247,7 @@ h6,
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(2, 36, 91, 1) 0%, rgba(2, 36, 91, 0) 100%);
+    background: transparent;  /* no overlay when no image */
     z-index: 0;
 }
 
@@ -257,13 +258,17 @@ h6,
 }
 
 .page-header .breadcrumb-item+.breadcrumb-item::before {
-    color: var(--light);
+    color: #212529;
 }
 
 .page-header .breadcrumb-item,
 .page-header .breadcrumb-item a {
     font-size: 18px;
-    color: var(--light);
+    color: #212529;
+}
+
+.page-header h1 {
+    color: #212529;
 }
 
 

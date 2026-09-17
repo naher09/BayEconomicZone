@@ -244,14 +244,12 @@ class ContactMessage(models.Model):
 
 
 class SiteBanner(models.Model):
-    """Admin-managed page header banner. One image per page (all pages except home)."""
+    """Admin-managed page header title. One per page (all pages except home)."""
     page_name = models.CharField(
         max_length=50, blank=True, null=True,
         help_text="URL slug, e.g. about, compliance, contact. Leave blank to apply to all pages."
     )
     page_title = models.CharField(max_length=200, blank=True, null=True, help_text="Optional page title override")
-    image = models.ImageField(upload_to='site_banner/', blank=True, null=True)
-    link = models.URLField(blank=True, null=True, help_text="Optional click destination")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
