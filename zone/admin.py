@@ -345,15 +345,9 @@ class OurGalleryAdmin(admin.ModelAdmin):
 # -------------------------------
 @admin.register(RequestInvestorData)
 class RequestInvestorDataAdmin(admin.ModelAdmin):
-    list_display = ('id', 'short_title')
-    search_fields = ('short_title',)
+    list_display = ('id', 'short_title', 'title')
+    search_fields = ('short_title', 'title')
     list_per_page = 20
-
-    fieldsets = (
-        (None, {
-            'fields': ('short_title', 'image')
-        }),
-    )
 
 # -------------------------------
 # Admin for RequestInvestorMessage

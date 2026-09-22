@@ -198,7 +198,7 @@ class NewsEvents(models.Model):
 
 class RequestInvestorData(models.Model):
     short_title = models.CharField(max_length=200, blank=True, null=True)
-    title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
     image = models.ImageField(upload_to='investor/', blank=True, null=True)
 
@@ -207,7 +207,7 @@ class RequestInvestorData(models.Model):
         verbose_name_plural = "Register as Investors"
 
     def __str__(self):
-        return self.title
+        return self.title or self.short_title or "Register as Investor"
 
 class RequestInvestorMessage(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
