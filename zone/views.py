@@ -80,10 +80,11 @@ def our_service(request):
     })
 
 def news_event(request):
-    news_events = NewsEvents.objects.filter(is_active=True)
-    return render(request, 'news_event.html', {
-        'news_events': news_events
-    })
+    # news_events = NewsEvents.objects.filter(is_active=True)
+    # return render(request, 'news_event.html', {
+    #     'news_events': news_events
+    # })
+    pass
 
 
 def mission_vision(request):

@@ -129,6 +129,7 @@ class LegalFramework(models.Model):
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
     important_link = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to='legal_framework/', blank=True, null=True)
     is_active = models.BooleanField(default=True, blank=True, null=True)
 
     def __str__(self):
@@ -199,6 +200,12 @@ class RequestInvestorData(models.Model):
     short_title = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
+    image = models.ImageField(upload_to='investor/', blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Register as Investor"
+        verbose_name_plural = "Register as Investors"
+
     def __str__(self):
         return self.title
 
@@ -216,6 +223,10 @@ class RequestInvestorMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+    class Meta:
+        verbose_name = "Register as Investor Message"
+        verbose_name_plural = "Register as Investor Messages"
 
 
 class ContactInfo(models.Model):
@@ -250,6 +261,8 @@ class SiteBanner(models.Model):
         help_text="URL slug, e.g. about, compliance, contact. Leave blank to apply to all pages."
     )
     page_title = models.CharField(max_length=200, blank=True, null=True, help_text="Optional page title override")
+    image = models.ImageField(upload_to='site_banner/', blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

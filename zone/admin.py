@@ -274,6 +274,7 @@ class LegalFrameworkAdmin(admin.ModelAdmin):
                 'title',
                 'description',
                 'important_link',
+                'image',
             )
         }),
         ('Status', {
@@ -337,27 +338,22 @@ class OurGalleryAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
 
-@admin.register(NewsEvents)
-class NewsEventsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'is_active', 'image_tag', 'link')
-    list_editable = ('is_active',)
-    search_fields = ('title',)
-    list_filter = ('is_active',)
-
-    def image_tag(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="width:100px; height:auto; border-radius:5px;" />', obj.image.url)
-        return "-"
-    image_tag.short_description = 'Image'
+# NewsEvents hidden for now
 
 # -------------------------------
 # Admin for RequestInvestorData
 # -------------------------------
 @admin.register(RequestInvestorData)
 class RequestInvestorDataAdmin(admin.ModelAdmin):
-    list_display = ('id', 'short_title', 'title')
-    search_fields = ('short_title', 'title')
+    list_display = ('id', 'short_title')
+    search_fields = ('short_title',)
     list_per_page = 20
+
+    fieldsets = (
+        (None, {
+            'fields': ('short_title', 'image')
+        }),
+    )
 
 # -------------------------------
 # Admin for RequestInvestorMessage
@@ -437,7 +433,7 @@ class OurServiceAdmin(admin.ModelAdmin):
             'fields': ('description',)
         }),
         ('Images', {
-            'fields': ('image_1', 'image_2', 'image_preview')
+            'fields': ('image_1', 'image_preview')
         }),
     )
 

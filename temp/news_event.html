@@ -3,7 +3,8 @@
 {% block content %}
 
     <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn bg-light" data-wow-delay="0.1s">
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn bg-light" data-wow-delay="0.1s"
+     {% if site_banner and site_banner.image %}style="background-image: url('{{ site_banner.image.url }}');"{% endif %}>
         <div class="container py-5">
             <h1 class="display-3 text-dark animated slideInRight">News & Events</h1>
             <nav aria-label="breadcrumb">
