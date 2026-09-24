@@ -44,9 +44,29 @@ body { background: #fff !important; }
     align-items: flex-start;
 }
 
+/* Fixed-size images for key management members (800x1000 source → 300x375 display) */
+.member-img {
+    height: 375px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.member-img img {
+    width: 300px;
+    height: 375px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Modal image fixed at 300x375 */
 .member-desc-wrapper img {
     border-radius: 15px;
-    max-width: 260px;
+    width: 300px;
+    height: 375px;
+    object-fit: cover;
+    object-position: center top;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
@@ -92,10 +112,10 @@ body { background: #fff !important; }
   <!-- Section Title -->
 
   <div class="container">
-    <div class="row gy-5">
+    <div class="row gy-5 justify-content-center">
 
       {% for member in team_members %}
-      <div class="col-lg-4 col-md-6 member" data-aos="fade-up">
+        <div class="col-lg-4 col-md-6 member" data-aos="fade-up">
 
         <div class="member-img">
           {% if member.image %}
@@ -103,14 +123,6 @@ body { background: #fff !important; }
           {% else %}
             <img src="{% static 'assets/img/team/default.jpg' %}" class="img-fluid" alt="No Image">
           {% endif %}
-
-          <div class="social">
-            {% if member.link %}
-              <a href="{{ member.link }}" target="_blank">
-                <i class="bi bi-link-45deg"></i>
-              </a>
-            {% endif %}
-          </div>
         </div>
 
         <div class="member-info text-center">
@@ -118,10 +130,10 @@ body { background: #fff !important; }
 
           <!-- Short Designation -->
           <div>
-            <p><b>{{ member.designation|striptags|truncatewords:15 }}</b></p>
+            <p><b>{{ member.designation|striptags|truncatewords:15|safe }}</b></p>
           </div>
           <div>
-            {{ member.description|striptags|truncatewords:15 }}
+            {{ member.description|striptags|truncatewords:15|safe }}
           </div>
 
           <!-- See More Button -->

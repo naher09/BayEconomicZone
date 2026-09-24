@@ -2,43 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-/* CKEditor content base */
-.ckeditor-content {
-    width: 100%;
-}
-
-/* Table auto-fit (NO SCROLL, NO CUT) */
-.ckeditor-content table {
-    width: 100% !important;
-    max-width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-
-/* Cell behavior */
-.ckeditor-content th,
-.ckeditor-content td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    white-space: normal;
-    word-break: break-word;
-}
-
-/* Header style */
-.ckeditor-content th {
-    background-color: #f5f5f5;
-    font-weight: 600;
-}
-
-/* Mobile handling */
-@media (max-width: 768px) {
-    .ckeditor-content table {
-        font-size: 14px;
-    }
-}
-</style>
-
 <!-- Page Header Start -->
 <div class="container-fluid page-header py-5 mb-5 wow fadeIn bg-light" data-wow-delay="0.1s"
      {% if site_banner and site_banner.image %}style="background-image: url('{{ site_banner.image.url }}');"{% endif %}>
@@ -59,26 +22,153 @@
 </div>
 <!-- Page Header End -->
 
-<!-- START SECTION UI ELEMENT -->
+<!-- FACILITIES SECTION -->
 <section class="about-us bg-white-1">
     <div class="container">
         <div class="row">
             <div class="sec-title">
                 <br><br>
                 <h2>FACILITIES <span>AT BEZ</span></h2>
-                <p>{{ facilities_view.title }}</p>
             </div>
 
-            <div class="col-lg-12 col-md-12 mb70 bg-shb p-3 who-1">
-                <!-- CKEditor Content -->
-                <div class="pftext ckeditor-content">
-                    {{ facility.description|safe }}
+            {% for facility in facilities %}
+            <div class="col-lg-12 col-md-12 mb-5 bg-shb p-4 who-1 facility-item">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-md-7 mb-4 mb-lg-0">
+                        <h4>{{ facility.name }}</h4>
+                        <div class="pftext">
+                            {{ facility.description|safe }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 text-center">
+                        {% if facility.image %}
+                        <img src="{{ facility.image.url }}" alt="{{ facility.name }}" class="img-fluid rounded shadow-sm" style="max-height: 300px; object-fit: cover;">
+                        {% else %}
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <span class="text-muted">No Image</span>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <p class="text-center">No facilities available.</p>
+            {% endfor %}
 
         </div>
     </div>
 </section>
-<!-- END SECTION UI ELEMENT -->
+<!-- END FACILITIES SECTION -->
+
+<!-- INCENTIVES SECTION -->
+<section class="about-us bg-light pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 sec-title text-center mb-5">
+                <h2>KEY INCENTIVES <span>FOR UNIT INVESTORS</span></h2>
+                <p>Attractive incentives and benefits for investors in Bay Economic Zone</p>
+            </div>
+
+            <div class="row g-4">
+                {% for incentive in incentives %}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-6 {% if not forloop.counter0|divisibleby:2 %}offset-lg-6{% endif %}">
+                            <div class="card h-100 border-0 shadow-sm incentive-card {% if forloop.counter0|divisibleby:2 %}incentive-left{% else %}incentive-right{% endif %}">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title">{{ incentive.title }}</h5>
+                                    <p class="card-text text-muted">{{ incentive.short_description|safe }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center">No incentives available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END INCENTIVES SECTION -->
+
+<style>
+.facility-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.facility-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.facility-item h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.incentive-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid #e9ecef;
+}
+.incentive-left {
+    border-left: 4px solid #1e3a8a;
+}
+.incentive-right {
+    border-right: 4px solid #1e3a8a;
+}
+.incentive-left:hover {
+    transform: translateX(8px);
+}
+.incentive-right:hover {
+    transform: translateX(-8px);
+}
+.incentive-card:hover {
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.incentive-card h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+}
+.incentive-card .card-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #5a6c7d;
+}
+.incentive-card ul {
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+}
+    .incentive-card ul li {
+        margin-bottom: 0.35rem;
+        line-height: 1.4;
+    }
+    .facility-item .pftext ul {
+        margin-bottom: 0;
+        padding-left: 1.5rem;
+    }
+    .facility-item .pftext ul li {
+        margin-bottom: 0.35rem;
+        line-height: 1.5;
+    }
+@media (max-width: 768px) {
+    .facility-item .col-lg-4 {
+        margin-top: 1.5rem;
+    }
+    .incentive-left:hover,
+    .incentive-right:hover {
+        transform: translateY(-5px);
+    }
+    .incentive-left,
+    .incentive-right {
+        border-left: 4px solid #1e3a8a;
+        border-right: none;
+    }
+}
+</style>
 
 {% endblock %}

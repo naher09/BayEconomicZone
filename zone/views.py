@@ -61,9 +61,11 @@ def legal_frameworks(request):
 
 
 def incentives_facilities(request):
-    data = FacilitiesIncentives.objects.filter(is_active=True).first()
+    facilities = Facility.objects.filter(is_active=True).order_by('order')
+    incentives = Incentive.objects.filter(is_active=True).order_by('order')
     return render(request, 'facilities.html', {
-        'facility': data
+        'facilities': facilities,
+        'incentives': incentives
     })
 
 
@@ -101,6 +103,7 @@ def request_investor(request):
 
     if request.method == 'POST':
         name = request.POST.get('name', '').strip()
+        company = request.POST.get('company', '').strip()
         email = request.POST.get('email', '').strip()
         phone = request.POST.get('phone', '').strip()
         city = request.POST.get('city', '').strip()
@@ -113,6 +116,7 @@ def request_investor(request):
         else:
             RequestInvestorMessage.objects.create(
                 name=name,
+                company=company,
                 email=email,
                 phone=phone,
                 city=city,
@@ -124,6 +128,7 @@ def request_investor(request):
                 subject=f'New Investor Registration: {name}',
                 message=(
                     f'Name: {name}\n'
+                    f'Company: {company}\n'
                     f'Email: {email}\n'
                     f'Phone: {phone}\n'
                     f'City: {city}\n'

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.utils.html import format_html
+from django.utils.html import strip_tags, format_html
+from html import unescape
 from .models import *
 
 
@@ -168,10 +169,11 @@ class ComplianceSectionAdmin(admin.ModelAdmin):
 # -------------------------------
 @admin.register(KeyManagement)
 class KeyManagementAdmin(admin.ModelAdmin):
+    exclude = ('link',)
     list_display = (
         'image_preview',
         'name',
-        'designation',
+        'get_clean_designation',
         'order',
         'is_active',
     )
@@ -191,9 +193,12 @@ class KeyManagementAdmin(admin.ModelAdmin):
 
     image_preview.short_description = "Image"
 
-    def get_short_designation(self, obj):
-        return obj.designation[:50] + "..." if len(obj.designation) > 50 else obj.designation
-    get_short_designation.short_description = "Designation"
+    def get_clean_designation(self, obj):
+        """Display designation as clean text — strips HTML tags and decodes entities."""
+        if obj.designation:
+            return unescape(strip_tags(obj.designation))
+        return "-"
+    get_clean_designation.short_description = "Designation"
 
 @admin.register(AboutSection)
 class AboutSectionAdmin(admin.ModelAdmin):
@@ -285,44 +290,7 @@ class LegalFrameworkAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(FacilitiesIncentives)
-class FacilitiesIncentivesAdmin(admin.ModelAdmin):
-    list_display = (
-        'short_title',
-        'title',
-        'is_active',
-    )
 
-    list_editable = (
-        'is_active',
-    )
-
-    list_filter = (
-        'is_active',
-    )
-
-    search_fields = (
-        'short_title',
-        'title',
-        'description',
-    )
-
-    ordering = ('-id',)
-
-    fieldsets = (
-        ('Facilities & Incentives Content', {
-            'fields': (
-                'short_title',
-                'title',
-                'description',
-            )
-        }),
-        ('Status', {
-            'fields': (
-                'is_active',
-            )
-        }),
-    )
 
 @admin.register(OurGallery)
 class OurGalleryAdmin(admin.ModelAdmin):
@@ -354,15 +322,15 @@ class RequestInvestorDataAdmin(admin.ModelAdmin):
 # -------------------------------
 @admin.register(RequestInvestorMessage)
 class RequestInvestorMessageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'phone', 'city', 'country', 'created_at', 'is_read')
+    list_display = ('id', 'name', 'company', 'email', 'phone', 'city', 'country', 'created_at', 'is_read')
     list_editable = ('is_read',)
-    search_fields = ('name', 'email', 'phone', 'city', 'country')
+    search_fields = ('name', 'company', 'email', 'phone', 'city', 'country')
     list_filter = ('is_read', 'created_at')
-    readonly_fields = ('name', 'email', 'phone', 'city', 'country', 'address', 'message', 'created_at')
+    readonly_fields = ('name', 'company', 'email', 'phone', 'city', 'country', 'address', 'message', 'created_at')
 
     fieldsets = (
         ('Sender Information', {
-            'fields': ('name', 'email', 'phone', 'city', 'country', 'address', 'created_at')
+            'fields': ('name', 'company', 'email', 'phone', 'city', 'country', 'address', 'created_at')
         }),
         ('Message', {
             'fields': ('message', 'is_read')
@@ -372,7 +340,7 @@ class RequestInvestorMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'phone_number', 'email_address', 'office_address','map_link', 'is_active')
+    list_display = ('id', 'title', 'phone_number', 'email_address', 'office_address','map_link', 'map_directions_link', 'is_active')
     list_editable = ('map_link', 'is_active',)
     search_fields = ('title', 'phone_number', 'email_address', 'office_address')
     list_filter = ('is_active',)
@@ -381,7 +349,7 @@ class ContactInfoAdmin(admin.ModelAdmin):
             'fields': ('title', 'description', 'is_active')
         }),
         ('Contact Details', {
-            'fields': ('phone_number', 'email_address', 'office_address', 'map_link')
+            'fields': ('phone_number', 'email_address', 'office_address', 'map_link', 'map_directions_link')
         }),
     )
 
@@ -471,3 +439,46 @@ class SiteBannerAdmin(admin.ModelAdmin):
             )
         return "-"
     image_preview.short_description = 'Preview'
+
+
+@admin.register(Facility)
+class FacilityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order', 'is_active', 'image_preview')
+    list_editable = ('order', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('name', 'description')
+    ordering = ('order',)
+    readonly_fields = ('image_preview',)
+
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'description', 'order', 'is_active')
+        }),
+        ('Image', {
+            'fields': ('image', 'image_preview')
+        }),
+    )
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html(
+                '<img src="{}" style="height:150px; border-radius:6px;" />',
+                obj.image.url
+            )
+        return "No Image"
+    image_preview.short_description = "Image Preview (displayed on right)"
+
+
+@admin.register(Incentive)
+class IncentiveAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'short_description')
+    ordering = ('order',)
+
+    fieldsets = (
+        ('Incentive Details', {
+            'fields': ('title', 'short_description', 'order', 'is_active')
+        }),
+    )

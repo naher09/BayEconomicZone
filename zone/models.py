@@ -118,7 +118,7 @@ class KeyManagement(models.Model):
     name = models.CharField(max_length=200)
     designation = RichTextUploadingField('Description')
     description = RichTextUploadingField('Description')
-    link = models.URLField()
+    link = models.URLField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0, help_text="Controls display order on the page.")
     is_active = models.BooleanField(default=True, help_text="Uncheck to hide this person from the website.")
 
@@ -135,14 +135,7 @@ class LegalFramework(models.Model):
     def __str__(self):
         return self.title
 
-class FacilitiesIncentives(models.Model):
-    short_title = models.CharField(max_length=100, blank=True, null=True)
-    title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
-    description = RichTextUploadingField('Description', blank=True, null=True)
-    is_active = models.BooleanField(default=True, blank=True, null=True)
 
-    def __str__(self):
-        return self.title
 
 class OurService(models.Model):
     short_title = models.CharField(max_length=100, blank=True, null=True)
@@ -211,6 +204,7 @@ class RequestInvestorData(models.Model):
 
 class RequestInvestorMessage(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
+    company = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
@@ -233,7 +227,10 @@ class ContactInfo(models.Model):
     phone_number = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     email_address = models.EmailField(blank=True, null=True)
     office_address = models.CharField(max_length=300, default="We Are Leader", blank=True, null=True)
-    map_link = models.URLField(blank=True, null=True, max_length=500)
+    map_link = models.URLField(blank=True, null=True, max_length=500,
+                               help_text="Google Maps EMBED url (https://www.google.com/maps/embed?pb=...). Used only inside the map <iframe>.")
+    map_directions_link = models.URLField(blank=True, null=True, max_length=500,
+                                          help_text="Regular Google Maps place/directions link (https://www.google.com/maps/place/... or /maps/dir/?api=1&destination=...). Used by the 'Direction' button. Must NOT be an embed url.")
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
     is_active = models.BooleanField(default=True, blank=True, null=True)
@@ -272,3 +269,32 @@ class SiteBanner(models.Model):
     class Meta:
         verbose_name = "Site Banner"
         verbose_name_plural = "Site Banner"
+
+
+class Facility(models.Model):
+    name = models.CharField(max_length=255)
+    description = RichTextUploadingField('Description', blank=True, null=True)
+    image = models.ImageField(upload_to='facilities/', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+
+class Incentive(models.Model):
+    title = models.CharField(max_length=255)
+    short_description = RichTextUploadingField('Description', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title

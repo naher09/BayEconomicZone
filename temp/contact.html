@@ -58,9 +58,13 @@
                     </div>
                     <h4 class="mb-3">Office Address</h4>
                     <p class="mb-2">{{ contact_info.office_address }}</p>
-                    {% if contact_info.map_link %}
-                    <a class="btn btn-primary px-4" href="{{ contact_info.map_link }}" target="_blank">Direction <i
+                    {% if contact_info.map_directions_link %}
+                    <a class="btn btn-primary px-4" href="{{ contact_info.map_directions_link }}" target="_blank">Direction <i
                             class="fa fa-arrow-right ms-2"></i></a>
+                    {% elif contact_info.office_address %}
+                    <a class="btn btn-primary px-4"
+                       href="https://www.google.com/maps/search/?api=1&query={{ contact_info.office_address|urlencode }}"
+                       target="_blank">Direction <i class="fa fa-arrow-right ms-2"></i></a>
                     {% endif %}
                 </div>
             </div>

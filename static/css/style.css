@@ -1,10 +1,14 @@
 /********** Template CSS **********/
 :root {
-    --primary: #FF5E14;
+    --primary: #e20c18;
     --secondary: #5F656F;
     --light: #F5F5F5;
     --dark: #02245B;
 }
+
+/*** Fonts ***/
+body { font-family: 'Lato', sans-serif; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Montserrat', sans-serif; }
 
 .back-to-top {
     position: fixed;
