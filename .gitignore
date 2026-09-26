@@ -24,3 +24,7 @@ Thumbs.db
 zone/migrations/0003_compliancesection_keymanagement_and_more.py
 zone/migrations/0004_mission_vision_delete_keymanagementheadline_and_more.py
 zone/migrations/0005_alter_mission_options_alter_vision_options.py
+
+# SQLite database
+db.sqlite3
+db.sqlite3-journal
