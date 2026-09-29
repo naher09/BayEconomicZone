@@ -32,8 +32,7 @@
             </div>
 
             {% for facility in facilities %}
-            <div class="col-lg-12 col-md-12 mb-5 bg-shb p-4 who-1 facility-item">
-                <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12 mb-5 p-4 facility-item {% if forloop.counter0|divisibleby:2 %}facility-ash{% else %}facility-white{% endif %}">                <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7 mb-4 mb-lg-0">
                         <h4>{{ facility.name }}</h4>
                         <div class="pftext">
@@ -61,7 +60,7 @@
 <!-- END FACILITIES SECTION -->
 
 <!-- INCENTIVES SECTION -->
-<section class="about-us bg-light pt-5 pb-5">
+<section class="about-us bg-white pt-5 pb-5">
     <div class="container">
         <div class="row">
             <div class="col-12 sec-title text-center mb-5">
@@ -69,17 +68,16 @@
                 <p>Attractive incentives and benefits for investors in Bay Economic Zone</p>
             </div>
 
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center">
                 {% for incentive in incentives %}
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-lg-6 {% if not forloop.counter0|divisibleby:2 %}offset-lg-6{% endif %}">
-                            <div class="card h-100 border-0 shadow-sm incentive-card {% if forloop.counter0|divisibleby:2 %}incentive-left{% else %}incentive-right{% endif %}">
-                                <div class="card-body p-4">
-                                    <h5 class="card-title">{{ incentive.title }}</h5>
-                                    <p class="card-text text-muted">{{ incentive.short_description|safe }}</p>
-                                </div>
-                            </div>
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <div class="card h-100 border-0 shadow-sm incentive-card
+                                {% cycle 'inc-a' 'inc-b' 'inc-c' 'inc-d' %}
+                                {% cycle 'wow fadeInRight' 'wow fadeInLeft' %}"
+                         data-wow-delay="0.{{ forloop.counter }}s">
+                        <div class="card-body p-4">
+                            <h5 class="card-title">{{ incentive.title }}</h5>
+                            <p class="card-text">{{ incentive.short_description|safe }}</p>
                         </div>
                     </div>
                 </div>
@@ -96,6 +94,15 @@
 .facility-item {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Alternating box backgrounds */
+.facility-white {
+    background-color: #ffffff;
+    border-radius: 12px;
+}
+.facility-ash {
+    background-color: #f8f9fa;   /* light ash gray */
+    border-radius: 12px;
+}
 .facility-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -105,28 +112,25 @@
     margin-bottom: 1rem;
     font-weight: 600;
 }
+/* Centered incentive cards, one background per item */
 .incentive-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 12px;
     overflow: hidden;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border: 1px solid #e9ecef;
-}
-.incentive-left {
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-left: 4px solid #1e3a8a;
 }
-.incentive-right {
-    border-right: 4px solid #1e3a8a;
-}
-.incentive-left:hover {
-    transform: translateX(8px);
-}
-.incentive-right:hover {
-    transform: translateX(-8px);
-}
 .incentive-card:hover {
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.14);
 }
+
+/* Distinct background per incentive */
+.inc-a { background-color: #eef2ff; border-left-color: #4c6ef5; }  /* soft indigo */
+.inc-b { background-color: #e9f7ef; border-left-color: #2f9e5f; }  /* soft green  */
+.inc-c { background-color: #fff4e5; border-left-color: #e8890c; }  /* soft amber  */
+.inc-d { background-color: #fdecee; border-left-color: #e20c18; }  /* brand red   */
+
 .incentive-card h5 {
     color: #2c3e50;
     font-weight: 600;
@@ -137,7 +141,7 @@
 .incentive-card .card-text {
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #5a6c7d;
+    color: #3f4e5a;
 }
 .incentive-card ul {
     margin-bottom: 0;
@@ -158,15 +162,6 @@
 @media (max-width: 768px) {
     .facility-item .col-lg-4 {
         margin-top: 1.5rem;
-    }
-    .incentive-left:hover,
-    .incentive-right:hover {
-        transform: translateY(-5px);
-    }
-    .incentive-left,
-    .incentive-right {
-        border-left: 4px solid #1e3a8a;
-        border-right: none;
     }
 }
 </style>

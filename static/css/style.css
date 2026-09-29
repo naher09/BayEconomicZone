@@ -733,6 +733,27 @@ h6,
     color: #212529 !important;
 }
 
+.footer .footer-jv-title { font-size: .95rem; margin-bottom: 10px; }
+.footer .footer-jv-title p:last-child { margin-bottom: 0; }
+.footer .footer-jv-title { font-size: .95rem; margin-bottom: 10px; }
+.footer .footer-jv-title p:last-child { margin-bottom: 0; }
+.footer .footer-info-line {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: 6px;
+    font-size: .95rem;
+    color: inherit;
+    text-decoration: none;
+}
+.footer .footer-info-line:hover { color: var(--primary); }
+.footer .footer-info-line i {
+    flex: 0 0 auto;
+    color: var(--primary);
+    line-height: 1.5;
+}
+.footer .footer-info-line span { min-width: 0; word-break: break-word; }
+
 .copyright {
     background-color: #F8F9FA;
     color: #212529;

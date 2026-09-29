@@ -1,4 +1,4 @@
-from .models import SiteBanner
+from .models import SiteBanner, ContactInfo
 
 
 def site_banner(request):
@@ -12,4 +12,5 @@ def site_banner(request):
     )
     return {
         'site_banner': banner,
+        'contact_info': ContactInfo.objects.filter(is_active=True).first(),
     }

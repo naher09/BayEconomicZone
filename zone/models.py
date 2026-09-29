@@ -179,6 +179,14 @@ class OurGallery(models.Model):
     def __str__(self):
         return self.title
 
+class PhotoGallery(models.Model):
+    title = models.CharField(max_length=300, default="We Are Leader In International Market", blank=True, null=True)
+    image = models.ImageField(upload_to='photo_gallery/', blank=True, null=True)
+    is_active = models.BooleanField(default=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
 class NewsEvents(models.Model):
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
@@ -228,12 +236,19 @@ class ContactInfo(models.Model):
     email_address = models.EmailField(blank=True, null=True)
     office_address = models.CharField(max_length=300, default="We Are Leader", blank=True, null=True)
     map_link = models.URLField(blank=True, null=True, max_length=500,
-                               help_text="Google Maps EMBED url (https://www.google.com/maps/embed?pb=...). Used only inside the map <iframe>.")
+                               help_text="Google Maps EMBED url (https://www.google.com/maps/embed?pb=...). Used only inside the map iframe.")
     map_directions_link = models.URLField(blank=True, null=True, max_length=500,
                                           help_text="Regular Google Maps place/directions link (https://www.google.com/maps/place/... or /maps/dir/?api=1&destination=...). Used by the 'Direction' button. Must NOT be an embed url.")
     title = models.CharField(max_length=300, default="We Are Leader In Industrial Market", blank=True, null=True)
     description = RichTextUploadingField('Description', blank=True, null=True)
     is_active = models.BooleanField(default=True, blank=True, null=True)
+
+    # ---- Joint Venture (footer column) ----
+    jv_details = RichTextUploadingField('Joint Venture Details', blank=True, null=True,
+                                        help_text="Rich text shown in the footer Joint Venture column.")
+    jv_whatsapp = models.CharField(max_length=30, blank=True, null=True,
+                                   help_text="e.g. +8801709995677")
+    jv_email = models.EmailField(blank=True, null=True)
 
     def __str__(self):
         return self.title

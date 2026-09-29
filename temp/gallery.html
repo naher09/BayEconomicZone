@@ -19,6 +19,89 @@
     <!-- Page Header End -->
 
 
+          <!-- Photo Gallery Start -->
+    <div class="container py-5 my-5">
+    <div class="text-center mx-auto" style="max-width:600px;">
+<!--    <p class="fw-medium text-uppercase text-primary mb-2">Visitor Photo Gallery</p>-->
+        <h1 style="font-size:2.5rem; font-weight:700; margin-bottom:50px;">
+            Photo Gallery
+        </h1>
+    </div>
+
+    <div class="row g-4">
+        <!-- Item 1 -->
+        <div class="row g-4">
+
+    {% for photo in photo_galleries %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+        <div style="
+            position:relative;
+            overflow:hidden;
+            border-radius:12px;
+            background:#fff;
+            box-shadow:0 12px 30px rgba(0,0,0,0.08);
+            transition:all 0.4s ease;
+        "
+        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 20px 45px rgba(0,0,0,0.15)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'">
+
+            <!-- Image -->
+            <div style="height:230px; overflow:hidden;">
+                {% if photo.image %}
+                <img src="{{ photo.image.url }}"
+                     alt="{{ photo.title }}"
+                     style="
+                        width:100%;
+                        height:100%;
+                        object-fit:cover;
+                        transition:transform 0.6s ease;
+                     "
+                     onmouseover="this.style.transform='scale(1.1)'"
+                     onmouseout="this.style.transform='scale(1)'">
+                {% endif %}
+            </div>
+
+            <!-- Overlay -->
+            <div style="
+                position:absolute;
+                inset:0;
+                background:linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.2));
+                display:flex;
+                align-items:flex-end;
+                justify-content:center;
+                padding:20px;
+                opacity:0;
+                transition:opacity 0.4s ease;
+            "
+            onmouseover="this.style.opacity='1'"
+            onmouseout="this.style.opacity='0'">
+
+                <h5 style="
+                    color:#fff;
+                    font-weight:600;
+                    margin:0;
+                    letter-spacing:0.5px;
+                    text-align:center;
+                ">
+                    {{ photo.title }}
+                </h5>
+            </div>
+
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p class="text-center text-muted">No photos have been added yet. Please add photos from the admin panel.</p>
+    </div>
+    {% endfor %}
+
+</div>
+
+    </div>
+</div>
+    <!-- Photo Gallery End -->
+
     <!-- Project Start -->
     <!-- Gallery Start -->
     <div class="container py-5 my-5">

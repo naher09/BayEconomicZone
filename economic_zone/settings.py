@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ki^xe(gu0-(aky0f$2-178%sk6cusx)5bmac8(b0_gk-fva$+9
 DEBUG = True
 
 ALLOWED_HOSTS = [
-     '103.169.105.109',
+     # '103.169.105.109',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -191,7 +191,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": True,
     "theme": "lumen",
-    "dark_mode_theme": None,
+    "default_theme_mode": "auto",
     "button_classes": {
         "primary": "btn-outline-primary",
         "secondary": "btn-outline-secondary",
@@ -280,7 +280,7 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
             ['Styles', 'Format', 'Font', 'FontSize'],
             ['TextColor', 'BGColor'],
             ['Maximize', 'ShowBlocks', 'CodeSnippet'],
@@ -294,7 +294,7 @@ CKEDITOR_CONFIGS = {
             'clipboard',
             'dialog',
             'dialogui',
-            'iframe',
+            # 'iframe',
             'table',
             'tableresize',
             'justify',

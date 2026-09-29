@@ -306,6 +306,23 @@ class OurGalleryAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
 
+# -------------------------------
+# Photo Gallery Admin
+# -------------------------------
+@admin.register(PhotoGallery)
+class PhotoGalleryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'is_active', 'image_tag')
+    list_editable = ('is_active',)
+    search_fields = ('title',)
+    list_filter = ('is_active',)
+
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width: 100px; height:auto; border-radius:5px;" />', obj.image.url)
+        return "-"
+    image_tag.short_description = 'Image'
+
+
 # NewsEvents hidden for now
 
 # -------------------------------
@@ -340,18 +357,25 @@ class RequestInvestorMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'phone_number', 'email_address', 'office_address','map_link', 'map_directions_link', 'is_active')
-    list_editable = ('map_link', 'is_active',)
-    search_fields = ('title', 'phone_number', 'email_address', 'office_address')
-    list_filter = ('is_active',)
-    fieldsets = (
-        ('General Info', {
-            'fields': ('title', 'description', 'is_active')
-        }),
-        ('Contact Details', {
-            'fields': ('phone_number', 'email_address', 'office_address', 'map_link', 'map_directions_link')
-        }),
+
+    list_display = (
+        'id',
+        'title',
+        'phone_number',
+        'email_address',
+        'jv_email',
+        'office_address',
+        'is_active',
     )
+
+    search_fields = (
+        'title',
+        'phone_number',
+        'email_address',
+        'office_address',
+    )
+
+    list_filter = ('is_active',)
 
 
 # -------------------------------

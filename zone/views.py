@@ -71,8 +71,12 @@ def incentives_facilities(request):
 
 def gallery(request):
     galleries = OurGallery.objects.filter(is_active=True)
+    photo_galleries = PhotoGallery.objects.filter(is_active=True)
+
     return render(request, 'gallery.html', {
-        'galleries': galleries
+        'galleries': galleries,
+        'photo_galleries': photo_galleries,
+
     })
 
 def our_service(request):
