@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.utils.html import strip_tags, format_html
 from html import unescape
 from .models import *
+from django import forms
+from django.contrib import admin
+from django.db import models
 
 
 # -------------------------------
@@ -357,6 +360,11 @@ class RequestInvestorMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.URLField: {
+            'widget': forms.URLInput(attrs={'class': 'vURLField', 'style': 'width: 600px;'})
+        },
+    }
 
     list_display = (
         'id',
