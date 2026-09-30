@@ -456,7 +456,7 @@ class SiteBannerAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('page_name', 'page_title', 'image', 'link', 'is_active')
+            'fields': ('page_name', 'page_title', 'image', 'background_video', 'link', 'is_active')
         }),
         ('Preview', {
             'fields': ('image_preview', 'created_at')

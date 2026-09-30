@@ -3,49 +3,98 @@
 {% block content %}
 
     <div class="container-fluid px-0 mb-5">
-        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Header Banner Start -->
+        <div id="header-carousel" class="carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
 
+                <!-- Image banners first -->
                 {% for banner in banners %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-
-                    {% if banner.background_image %}
-                        <img class="w-100"
-                             src="{{ banner.background_image.url }}"
-                             alt="{{ banner.title }}">
-                    {% endif %}
-
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-10 text-start">
-
-                                    {% if banner.subtitle %}
-                                    <p class="fs-5 fw-medium text-primary text-uppercase animated slideInRight"
-                                       style="color:#b3bdce !important;">
-                                        {{ banner.subtitle }}
-                                    </p>
-                                    {% endif %}
-
-                                    <h1 class="display-1 text-white mb-5 animated slideInRight">
-                                        {{ banner.title }}
-                                    </h1>
-
-                                    {% if banner.button_text %}
-                                    <a href="{{ banner.button_link }}"
-                                       class="btn btn-primary py-3 px-5 animated slideInRight">
-                                        {{ banner.button_text }}
-                                    </a>
-                                    {% endif %}
-
+                    {% if not banner.background_video %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="4000">
+                        <div class="position-relative" style="height: 85vh; overflow: hidden;">
+                            {% if banner.background_image %}
+                            <img src="{{ banner.background_image.url }}"
+                                 alt="{{ banner.title }}"
+                                 style="width:100%; height:100%; object-fit:cover;">
+                            {% endif %}
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                                 style="background:rgba(0,0,0,0.45);">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10 text-start">
+                                            {% if banner.subtitle %}
+                                            <p class="fs-5 fw-medium text-uppercase text-white animated slideInRight">
+                                                {{ banner.subtitle }}
+                                            </p>
+                                            {% endif %}
+                                            <h1 class="display-1 text-white mb-5 animated slideInRight">
+                                                {{ banner.title }}
+                                            </h1>
+                                            {% if banner.button_text %}
+                                            <a href="{{ banner.button_link }}"
+                                               class="btn btn-primary py-3 px-5 animated slideInRight">
+                                                {{ banner.button_text }}
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </div>
+                    {% endif %}
                 {% endfor %}
 
+                <!-- Video banners after all images -->
+                {% for banner in banners %}
+                    {% if banner.background_video %}
+                    <div class="carousel-item" data-bs-interval="10000" >
+                        <div class="position-relative" style="height: 85vh; overflow: hidden;">
+                            <video autoplay muted playsinline
+                                   style="width:100%; height:100%; object-fit:cover;">
+                                <source src="{{ banner.background_video.url }}" type="video/mp4">
+                            </video>
+                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                                 style="background:rgba(0,0,0,0.45);">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10 text-start">
+                                            {% if banner.subtitle %}
+                                            <p class="fs-5 fw-medium text-uppercase text-white animated slideInRight">
+                                                {{ banner.subtitle }}
+                                            </p>
+                                            {% endif %}
+                                            <h1 class="display-1 text-white mb-5 animated slideInRight">
+                                                {{ banner.title }}
+                                            </h1>
+                                            {% if banner.button_text %}
+                                            <a href="{{ banner.button_link }}"
+                                               class="btn btn-primary py-3 px-5 animated slideInRight">
+                                                {{ banner.button_text }}
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button"
+            data-bs-target="#header-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button"
+            data-bs-target="#header-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+<!-- Header Banner End -->
             </div>
 
             <!-- Controls -->
@@ -53,16 +102,12 @@
                     data-bs-target="#header-carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
-
             <button class="carousel-control-next" type="button"
                     data-bs-target="#header-carousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
-
         </div>
-    </div>
-
-    <!-- Carousel End -->
+        <!-- Header Banner End -->
 
 
     <!-- Home About Start -->
@@ -276,6 +321,78 @@
     {% endif %}
     <!-- Service End -->
 
+    <!-- Mission & Vision Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+
+            <!-- Section Title -->
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">
+                <p class="fw-medium text-uppercase text-primary mb-2">Our Purpose</p>
+                <h1 class="display-5">Mission & Vision</h1>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Mission -->
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="p-5 h-100"
+                         style="background:white; border-radius:12px;
+                                box-shadow:0 10px 30px rgba(0,0,0,.08);
+                                transition:all .3s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';
+                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
+                         onmouseout="this.style.transform='none';
+                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-bullseye text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Our Mission</h4>
+                        </div>
+
+                        {% for mission in missions %}
+                            <h5>{{ mission.title }}</h5>
+                            <p class="mb-3">{{ mission.content|safe }}</p>
+                        {% empty %}
+                            <p>No mission added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Vision -->
+                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="p-5 h-100"
+                         style="background:white; border-radius:12px;
+                                box-shadow:0 10px 30px rgba(0,0,0,.08);
+                                transition:all .3s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';
+                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
+                         onmouseout="this.style.transform='none';
+                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-eye text-white"></i>
+                            </div>
+                            <h4 class="mb-0">Our Vision</h4>
+                        </div>
+
+                        {% for vision in visions %}
+                            <h5>{{ vision.title }}</h5>
+                            <p class="mb-3">{{ vision.content|safe }}</p>
+                        {% empty %}
+                            <p>No vision added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Mission & Vision End -->
+
+
     <!-- Project Start -->
     <div class="container-fluid bg-dark py-5 my-5">
         <div class="container">
@@ -386,76 +503,7 @@
     <!-- Testimonial End -->
 
 
-    <!-- Mission & Vision Start -->
-    <div class="container-xxl py-5 bg-light">
-        <div class="container">
 
-            <!-- Section Title -->
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">
-                <p class="fw-medium text-uppercase text-primary mb-2">Our Purpose</p>
-                <h1 class="display-5">Mission & Vision</h1>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- Mission -->
-                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                    <div class="p-5 h-100"
-                         style="background:white; border-radius:12px;
-                                box-shadow:0 10px 30px rgba(0,0,0,.08);
-                                transition:all .3s ease;"
-                         onmouseover="this.style.transform='translateY(-8px)';
-                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
-                         onmouseout="this.style.transform='none';
-                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
-
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="btn-square bg-primary rounded-circle me-3">
-                                <i class="fa fa-bullseye text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Our Mission</h4>
-                        </div>
-
-                        {% for mission in missions %}
-                            <h5>{{ mission.title }}</h5>
-                            <p class="mb-3">{{ mission.content|safe }}</p>
-                        {% empty %}
-                            <p>No mission added yet.</p>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Vision -->
-                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                    <div class="p-5 h-100"
-                         style="background:white; border-radius:12px;
-                                box-shadow:0 10px 30px rgba(0,0,0,.08);
-                                transition:all .3s ease;"
-                         onmouseover="this.style.transform='translateY(-8px)';
-                                      this.style.boxShadow='0 20px 40px rgba(0,0,0,.15)'"
-                         onmouseout="this.style.transform='none';
-                                     this.style.boxShadow='0 10px 30px rgba(0,0,0,.08)'">
-
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="btn-square bg-primary rounded-circle me-3">
-                                <i class="fa fa-eye text-white"></i>
-                            </div>
-                            <h4 class="mb-0">Our Vision</h4>
-                        </div>
-
-                        {% for vision in visions %}
-                            <h5>{{ vision.title }}</h5>
-                            <p class="mb-3">{{ vision.content|safe }}</p>
-                        {% empty %}
-                            <p>No vision added yet.</p>
-                        {% endfor %}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Mission & Vision End -->
 
 
 
@@ -579,9 +627,9 @@
 <!--                            <p style="margin-bottom:15px;">-->
 <!--                                Discover how AI is changing the future of industries.-->
 <!--                            </p>-->
-                            <a href="#" class="btn btn-outline-primary btn-sm">
-                                Read More <i class="fa fa-arrow-right ms-2"></i>
-                            </a>
+<!--                            <a href="#" class="btn btn-outline-primary btn-sm">-->
+<!--                                Read More <i class="fa fa-arrow-right ms-2"></i>-->
+<!--                            </a>-->
                         </div>
                     </div>
                 </div>

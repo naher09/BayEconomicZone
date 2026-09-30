@@ -237,7 +237,49 @@ h6,
         object-fit: cover;
     }
 }
+/* ---- Video-backed page header: same scale as the home banner ---- */
+.page-header { overflow: hidden; }
 
+/* Only banners that HAVE a video become full height, so Contact / Gallery /
+   Services keep the compact header. */
+.page-header.has-video {
+    display: flex;
+    align-items: center;          /* centres the title + breadcrumb, like home */
+    min-height: 85vh;             /* match index.html's 85vh */
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.page-header .header-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* fill without distortion */
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+    backface-visibility: hidden;  /* own GPU layer → smoother decode */
+    transform: translateZ(0);
+}
+
+/* darken so the title stays readable */
+.page-header.has-video::before { background: rgba(0, 0, 0, 0.45); z-index: 1; }
+.page-header.has-video > *:not(.header-video) { position: relative; z-index: 2; }
+
+.page-header.has-video h1,
+.page-header.has-video .breadcrumb-item,
+.page-header.has-video .breadcrumb-item a { color: #fff; }
+.page-header.has-video .breadcrumb-item + .breadcrumb-item::before { color: rgba(255,255,255,.75); }
+
+/* Title the same size as the home banner */
+.page-header.has-video h1 { font-size: clamp(2rem, 6vw, 3.5rem); }
+
+/* Tablet / mobile */
+@media (max-width: 991.98px) {
+    .page-header.has-video { min-height: 60vh; }
+    .page-header.has-video h1 { font-size: 2.5rem; }
+}
 .page-header {
     position: relative;
     background-color: #F8F9FA;  /* match footer bg-light */

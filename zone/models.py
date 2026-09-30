@@ -8,6 +8,7 @@ class HomeBanner(models.Model):
     subtitle = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True)
     background_image = models.ImageField(upload_to='Carousel/', blank=True, null=True)
+    background_video = models.FileField(upload_to='Carousel/videos/', blank=True, null=True)
     button_text = models.CharField(max_length=100, default='Our Services', blank=True, null=True)
     button_link = models.URLField(max_length=300, default='#', blank=True, null=True)
 
@@ -274,6 +275,7 @@ class SiteBanner(models.Model):
     )
     page_title = models.CharField(max_length=200, blank=True, null=True, help_text="Optional page title override")
     image = models.ImageField(upload_to='site_banner/', blank=True, null=True)
+    background_video = models.FileField(upload_to='site_banner/videos/', blank=True, null=True,)
     link = models.URLField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
