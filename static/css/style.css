@@ -328,7 +328,9 @@ h6,
 .facts .border {
     border-color: rgba(255, 255, 255, .1) !important;
 }
-
+.facts .display-2 {
+    color: #FF5A63 !important;
+}
 
 /*** Features ***/
 .btn-play {
