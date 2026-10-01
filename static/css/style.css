@@ -4,6 +4,7 @@
     --secondary: #5F656F;
     --light: #F5F5F5;
     --dark: #02245B;
+    --nav-h: 93px;    /* ← ADD THIS */
 }
 
 /*** Fonts ***/
@@ -49,6 +50,8 @@ h6,
     visibility: hidden;
     transition: opacity .5s ease-out, visibility 0s linear .5s;
     z-index: 99999;
+    background-color: #02245B !important;  /* ← ADD THIS LINE */
+
 }
 
 #spinner.show {
@@ -95,27 +98,65 @@ h6,
 }
 
 
-.topbar-right {
-    position: relative;
-    /* background: var(--primary); */
-}
+/*.topbar-right {*/
+/*    position: relative;*/
+/*    !* background: var(--primary); *!*/
+/*}*/
 
-.topbar-right::before {
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 100%;
-    top: 0;
-    left: -15px;
-    transform: skewX(-30deg);
-    background-color: var(--primary);
-}
+/*.topbar-right::before {*/
+/*    position: absolute;*/
+/*    content: "";*/
+/*    width: 30px;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: -15px;*/
+/*    transform: skewX(-30deg);*/
+/*    !*background-color: var(--primary);*!*/
+/*}*/
 
 
 /*** Navbar ***/
 .navbar.sticky-top {
-    top: -100px;
-    transition: .5s;
+    position: fixed;
+    top: 0;                    /* navbar is always visible */
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    transition: all .5s ease;  /* smooth bg + shadow transitions */
+}
+
+/* Transparent state — when navbar is over the banner */
+.navbar.sticky-top.transparent-navbar {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* On transparent navbar, make nav links & logo white so they show
+   against the dark banner overlay (rgba(0,0,0,0.45)) */
+.navbar.sticky-top.transparent-navbar .navbar-nav .nav-link,
+.navbar.sticky-top.transparent-navbar .navbar-brand img {
+    color: #fff !important;
+    filter: brightness(0) invert(1);  /* inverts a dark logo to light */
+}
+
+/* Solid background state — when scrolled past 300px */
+.navbar.sticky-top.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;  /* near-white, slight translucency */
+    backdrop-filter: blur(10px);                        /* optional frosted-glass effect */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* When scrolled, restore dark nav links (navbar-light default) */
+.navbar.sticky-top.scrolled .navbar-nav .nav-link,
+.navbar.sticky-top.scrolled .navbar-brand img {
+    color: var(--dark) !important;
+    filter: none;
+}
+/* ← ADD THIS entire block after line 147 */
+/* Dark fallback for carousel items — ensures transparent navbar
+   always shows a dark surface, not the white body background */
+#header-carousel .carousel-item {
+    background: linear-gradient(to right, rgba(2, 36, 91, 0.9) 0%, rgba(2, 36, 91, 0.8) 100%);
 }
 
 .navbar .navbar-brand {
@@ -191,7 +232,7 @@ h6,
 }
 
 
-/*** Header ***/
+
 .carousel-caption {
     top: 0;
     left: 0;
@@ -305,6 +346,19 @@ h6,
 
 .page-header .breadcrumb-item+.breadcrumb-item::before {
     color: #212529;
+}
+
+
+/* ---- Navbar overlap compensation for banners ---- */
+.page-header.has-video {
+    padding-top: var(--nav-h);
+}
+
+.page-header:not(.has-video) {
+    padding-top: calc(var(--nav-h) + 3rem) !important;
+}
+@media (max-width: 991.98px) {
+    :root { --nav-h: 75px; }
 }
 
 .page-header .breadcrumb-item,
