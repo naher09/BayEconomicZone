@@ -125,18 +125,16 @@ h6,
     transition: all .5s ease;  /* smooth bg + shadow transitions */
 }
 
-/* Transparent state — when navbar is over the banner */
 .navbar.sticky-top.transparent-navbar {
-    background: transparent !important;
-    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
-/* On transparent navbar, make nav links & logo white so they show
-   against the dark banner overlay (rgba(0,0,0,0.45)) */
 .navbar.sticky-top.transparent-navbar .navbar-nav .nav-link,
 .navbar.sticky-top.transparent-navbar .navbar-brand img {
-    color: #fff !important;
-    filter: brightness(0) invert(1);  /* inverts a dark logo to light */
+    color: var(--dark) !important;
+    filter: none;
 }
 
 /* Solid background state — when scrolled past 300px */
@@ -856,4 +854,7 @@ h6,
     background-color: #F8F9FA;
     color: #212529;
     border-top: 1px solid rgba(0, 0, 0, .1);  /* subtle divider — visible on light bg */
+}
+.text-justify {
+    text-align: justify !important;
 }

@@ -155,6 +155,8 @@ class OurService(models.Model):
     def __str__(self):
         return self.title
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 class Mission(models.Model):
     title = models.CharField(max_length=200,blank=True, null=True)
     content = models.TextField()

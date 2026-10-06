@@ -92,24 +92,24 @@ WSGI_APPLICATION = 'economic_zone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-# }
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'economic_zone_test_db',
-        'USER': 'economic_test',
-        'PASSWORD': 'Eco@12345!',
-        'HOST': 'localhost',  # Or your database host (e.g., '127.0.0.1')
-        'PORT': '5432',        # Default PostgreSQL port
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+   }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'economic_zone_test_db',
+#         'USER': 'economic_test',
+#         'PASSWORD': 'Eco@12345!',
+#         'HOST': 'localhost',  # Or your database host (e.g., '127.0.0.1')
+#         'PORT': '5432',        # Default PostgreSQL port
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

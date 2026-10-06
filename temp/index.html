@@ -319,7 +319,7 @@
 
                         {% for mission in missions %}
                             <h5>{{ mission.title }}</h5>
-                            <p class="mb-3">{{ mission.content|safe }}</p>
+                            <p class="mb-3 text-justify">{{ mission.content|safe }}</p>
                         {% empty %}
                             <p>No mission added yet.</p>
                         {% endfor %}
@@ -346,7 +346,7 @@
 
                         {% for vision in visions %}
                             <h5>{{ vision.title }}</h5>
-                            <p class="mb-3">{{ vision.content|safe }}</p>
+                            <p class="mb-3 text-justify">{{ vision.content|safe }}</p>
                         {% empty %}
                             <p>No vision added yet.</p>
                         {% endfor %}
