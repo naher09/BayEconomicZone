@@ -26,11 +26,13 @@ SECRET_KEY = 'django-insecure-ki^xe(gu0-(aky0f$2-178%sk6cusx)5bmac8(b0_gk-fva$+9
 DEBUG = True
 
 ALLOWED_HOSTS = [
+     'bayeconomiczone.com',
+     'www.bayeconomiczone.com',
      '103.169.105.109',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://103.169.105.109:7777',
+    'http://103.169.105.109:80',
 ]
 
 # Application definition
