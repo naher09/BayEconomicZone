@@ -211,6 +211,10 @@ h6,
 }
 
 @media (min-width: 992px) {
+    .navbar .navbar-nav {
+        flex-wrap: nowrap !important;
+    }
+
     .navbar .nav-item .dropdown-menu {
         display: block;
         border: none;
