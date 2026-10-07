@@ -26,18 +26,12 @@ SECRET_KEY = 'django-insecure-ki^xe(gu0-(aky0f$2-178%sk6cusx)5bmac8(b0_gk-fva$+9
 DEBUG = True
 
 ALLOWED_HOSTS = [
-      'www.bayeconomiczone.com',
-      'bayeconomiczone.com',
-      '103.169.105.109',
+     '103.169.105.109',
 ]
-
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://103.169.105.109:80',
+    'http://103.169.105.109:7777',
 ]
-
 
 # Application definition
 
@@ -98,24 +92,24 @@ WSGI_APPLICATION = 'economic_zone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
-#   'default': {
-#       'ENGINE': 'django.db.backends.sqlite3',
-#       'NAME': BASE_DIR / 'db.sqlite3',
-#   }
-#}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+# }
 
 
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'economic_zone_test_db',
-         'USER': 'economic_test',
-         'PASSWORD': 'Eco@12345!',
-         'HOST': 'localhost',  # Or your database host (e.g., '127.0.0.1')
-         'PORT': '5432',        # Default PostgreSQL port
-     }
- }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'economic_zone_test_db',
+        'USER': 'economic_test',
+        'PASSWORD': 'Eco@12345!',
+        'HOST': 'localhost',  # Or your database host (e.g., '127.0.0.1')
+        'PORT': '5432',        # Default PostgreSQL port
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -126,10 +126,10 @@ body { background: #fff !important; }
           <h4>{{ member.name }}</h4>
 
           <!-- Short Designation -->
-          <div>
+          <div >
             <p><b>{{ member.designation|striptags|truncatewords:15|safe }}</b></p>
           </div>
-          <div>
+          <div class="text-justify">
             {{ member.description|striptags|truncatewords:15|safe }}
           </div>
 
