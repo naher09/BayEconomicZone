@@ -211,6 +211,11 @@ h6,
 }
 
 @media (min-width: 992px) {
+    .navbar .navbar-collapse {
+        flex-grow: 1;
+        flex-basis: auto;
+    }
+
     .navbar .navbar-nav {
         flex-wrap: nowrap !important;
     }
