@@ -14,3 +14,10 @@ def site_banner(request):
         'site_banner': banner,
         'contact_info': ContactInfo.objects.filter(is_active=True).first(),
     }
+
+def analytics(request):
+    """Provide Google Analytics ID to all templates."""
+    from django.conf import settings
+    return {
+        'GOOGLE_ANALYTICS_ID': getattr(settings, 'GOOGLE_ANALYTICS_ID', ''),
+    }

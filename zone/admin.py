@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.db.models import Count, Q
 from django.utils.html import strip_tags, format_html
 from html import unescape
 from .models import *
 from django import forms
-from django.contrib import admin
 from django.db import models
+
 
 
 # -------------------------------
@@ -14,7 +15,7 @@ from django.db import models
 class HomeBannerAdmin(admin.ModelAdmin):
     list_display = ('sequence', 'title', 'subtitle', 'is_active', 'created_at', 'banner_preview')
     list_editable = ('sequence', 'is_active')
-    list_display_links = ('title',)   # ✅ FIX
+    list_display_links = ('title',)
     list_filter = ('is_active',)
     search_fields = ('title', 'subtitle')
     readonly_fields = ('banner_preview', 'created_at')
@@ -63,10 +64,10 @@ class HomeAboutSectionAdmin(admin.ModelAdmin):
 
 @admin.register(WhyChooseUsSection)
 class WhyChooseUsSectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'subtitle', 'is_active', 'created_at')  # Columns to display
-    list_filter = ('is_active', 'created_at')  # Filters in the sidebar
-    search_fields = ('title', 'subtitle', 'description') # Searchable fields
-    readonly_fields = ('created_at',)  # Read-only fields
+    list_display = ('title', 'subtitle', 'is_active', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'subtitle', 'description')
+    readonly_fields = ('created_at',)
 
 @admin.register(HomeService)
 class HomeServiceAdmin(admin.ModelAdmin):
@@ -136,7 +137,7 @@ class HomeOutPartnerAdmin(admin.ModelAdmin):
 
 @admin.register(AboutPageHeader)
 class PageHeaderAdmin(admin.ModelAdmin):
-    list_display = ('page_name', 'page_title', 'is_active')  # <-- title পরিবর্তন করে page_title
+    list_display = ('page_name', 'page_title', 'is_active')
     list_editable = ('is_active',)
     search_fields = ('page_name', 'page_title')
 
@@ -514,3 +515,4 @@ class IncentiveAdmin(admin.ModelAdmin):
             'fields': ('title', 'short_description', 'order', 'is_active')
         }),
     )
+
